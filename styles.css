@@ -1,83 +1,118 @@
-/* ESTILOS MOBILE-FIRST - Prioritarios para teléfonos */
-* {
+/* Estilos generales */
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Elimina scroll en móviles */
     font-family: Arial, sans-serif;
     background-color: #FFFFFF;
+    overflow-x: hidden; /* Previene el scroll horizontal */
 }
 
-/* Contenedor principal - OCUPA TODA LA PANTALLA */
+/* Contenedor principal */
 .contenedor {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    min-height: 100vh;
-    width: 100vw;
-    padding: 15px;
-}
-
-/* IMAGEN PRINCIPAL - Forzamos tamaño máximo */
-.foto {
+    align-items: center;
+    text-align: center;
     width: 100%;
-    max-width: 100vw; /* Forza el ancho completo */
+	    max-width: 1600px;
+    padding: 15px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Títulos y textos */
+.titulo, .leyenda {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(24px, 6vw, 40px); /* Tamaño responsive */
+    color: #0f0300;
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+.nombres {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(30px, 8vw, 70px); /* Tamaño responsive */
+    color: #333;
+    margin: 20px 0;
+    padding: 0 10px;
+}
+
+.texto-cuenta {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(18px, 5vw, 24px); /* Tamaño responsive */
+    color: #941212;
+    margin-bottom: 10px;
+}
+
+/* Imágenes */
+img {
+    max-width: 100%;
     height: auto;
-    max-height: 80vh; /* Máximo 80% de la altura visible */
-    object-fit: contain; /* Mantiene proporciones */
+    display: block;
 }
 
-/* CONTENEDOR del SELLO */
+.fotocorta, .presentacion1, .saloncolor21, .foto2, .dresscode, .confirmar {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+
+
+
+
+/* Cuenta regresiva */
+#cuenta {
+    font-family: Arial, sans-serif;
+    font-size: clamp(12px, 3vw, 15px);
+    color: #555;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Para móviles pequeños */
+    gap: 5px;
+    padding: 0 10px;
+}
+
+#cuenta span {
+    background-color: #e9d6c7;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Sello */
 .sello-contenedor {
-    width: 30%; /* Relativo al ancho de pantalla */
-    max-width: 150px;
-    margin-top: 20px;
-    cursor: pointer;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
 }
 
-/* SELLO en sí */
 .sello {
     width: 100%;
     height: auto;
     transition: transform 0.3s ease;
 }
 
-.sello:hover {
-    transform: scale(1.1);
-}
-
-/* Media query para tablets (pantallas más grandes) */
-@media (min-width: 768px) {
+/* Media Queries para ajustes específicos */
+@media (max-width: 600px) {
     .contenedor {
-        padding: 30px;
+        padding: 10px;
     }
     
-    .foto {
-        max-width: 90vw;
-        max-height: 75vh;
+    #cuenta {
+        gap: 3px;
     }
     
-    .sello-contenedor {
-        width: 20%;
-        max-width: 120px;
-    }
-}
-
-/* Media query para desktop (pantallas muy grandes) */
-@media (min-width: 1024px) {
-    .foto {
-        max-width: 80vw;
-        max-height: 70vh;
+    #cuenta span {
+        padding: 8px 10px;
+        font-size: 14px;
     }
     
-    .sello-contenedor {
-        width: 15%;
-        max-width: 100px;
+    .boton, #magicButton {
+        padding: 8px 15px;
     }
 }
