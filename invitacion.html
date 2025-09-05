@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Michelle y René</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Leyenda con efecto de máquina de escribir -->
+        <h2 class="leyenda" id="maquina-escribir"></h2>
+
+        <!-- Imagen en presentacion -->
+        <img src="images/presentacion1.svg" alt="Michelle y René" class="presentacion">
+		
+		
+		
+		 <!-- Imagen dias salon -->
+        <img src="images/saloncolor21.svg" alt="imegen letras atras" class="atras">
+
+
+<a href="https://www.google.com/maps/place/Sal%C3%B3n+El+Molino/@20.0896642,-101.4779955,17z/data=!4m14!1m7!3m6!1s0x842c51ef70f894a5:0x89f8a440183f0a51!2sSal%C3%B3n+El+Molino!8m2!3d20.0896642!4d-101.4779955!16s%2Fg%2F11h7cwlp0l!3m5!1s0x842c51ef70f894a5:0x89f8a440183f0a51!8m2!3d20.0896642!4d-101.4779955!16s%2Fg%2F11h7cwlp0l?entry=ttu&g_ep=EgoyMDI1MDYzMC4wIKXMDSoASAFQAw%3D%3D"
+ target="_blank">(Ubicación)</a> 
+ 
+        <!-- Cuenta regresiva -->
+        <div class="cuenta-regresiva">
+            <p class="texto-cuenta"></p>
+            <div id="cuenta"></div>
+        </div>
+
+       
+		
+        <!-- Foto de ustedes -->
+        <img src="images/detalles.svg" alt="Michelle y René" class="foto2">
+		
+         <!-- Imagen confirmar -->
+        <img src="images/dresscode.svg" alt="Confirmar" class="dresscode">
+
+   		 <!-- Imagen confirmar -->
+        <img src="images/confirmar2.svg" alt="Confirmar" class="confirmar">
+		
+		
+
+       
+        <script src="script.js"></script>
+
+</body>
+		
+    </div>
+	
+	
+<!DOCTYPE html>
+<html>
+<head>
+<title>Invitación de Boda</title>
+<style>
+   body { font-family: 'Arial', sans-serif; text-align: center; background: #fff9f9; }
+   .invitacion { margin: 20px auto; padding: 20px; max-width: 600px; border: 1px solid #e0c8c8; }
+   .formulario { background: #f5e9e9; padding: 15px; border-radius: 10px; }
+   button { background: #d4a8a8; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="invitacion">
+<!-- Tu diseño de invitación aquí -->
+<p>Hemos reservado <span id="numero-invitados">X</span> lugares para ti</p>
+<div class="formulario">
+<p>¿Confirmas tu asistencia?</p>
+<input type="radio" name="confirmacion" id="si" value="Sí"> <label for="si">Sí</label>
+<input type="radio" name="confirmacion" id="no" value="No"> <label for="no">No</label>
+<button onclick="confirmarAsistencia()">Enviar</button>
+<p id="mensaje"></p>
+</div>
+</div>
+<script>
+ // Datos del invitado (simulados o dinámicos)
+ const invitado = {
+   nombre: "María González",      // Reemplaza con datos reales o búscalos desde tu Sheet
+   telefono: "+521234567890",     // Ejemplo: usa el teléfono ingresado por el usuario
+   invitados: 5                   // Ejemplo: obtén este dato de tu Sheet
+ };
+ // Función ACTUALIZADA (Paso 4) - Pegar esto reemplazando la anterior
+ async function confirmarAsistencia() {
+   const confirmacion = document.querySelector('input[name="confirmacion"]:checked').value;
+   const fecha = new Date().toLocaleDateString();
+   try {
+     const response = await fetch(https://script.google.com/macros/s/AKfycbwxGUhgl-GdZswIfojG_XH7XKaqO0ZjkcHdLrCMCn3KSw1EUErK5d9QUZ25ctkifs8FGA/exec, {  // <-- Reemplaza con tu URL
+       method: "POST",
+       body: JSON.stringify({
+         nombre: invitado.nombre,
+         telefono: invitado.telefono,
+         confirmacion: confirmacion,
+         fecha: fecha
+       }),
+       headers: { "Content-Type": "application/json" }
+     });
+     const result = await response.json();
+     if (result.success) {
+       document.getElementById("mensaje").innerHTML = `
+         ¡Gracias, ${invitado.nombre}!<br>
+         Confirmación registrada: <strong>${confirmacion}</strong>.
+       `;
+     } else {
+       document.getElementById("mensaje").textContent = "Error: Invitado no encontrado.";
+     }
+   } catch (error) {
+     document.getElementById("mensaje").textContent = "Error al enviar. Intenta más tarde.";
+   }
+ }
+
+	
+	
+</body>
+</html>

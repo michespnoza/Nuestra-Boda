@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación de Michelle y René</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="contenedor">
+<!-- Título -->
+<h1 class="titulo"></h1>
+<!-- Imagen -->
+<img src="images/fotocorta.png" alt="Michelle y René" class="foto">
+<!-- Sello de cera (reemplaza el botón) -->
+<div class="sello-contenedor" onclick="irASiguiente()">
+<img src="images/sello.png" alt="Sello de cera" class="sello" id="sello">
+</div>
+</div>
+<script>
+       function irASiguiente() {
+           // Efecto de "rotación" antes de cambiar de página (opcional)
+           const sello = document.getElementById('sello');
+           sello.style.transform = 'rotate(10deg) scale(1.1)';
+           sello.style.transition = 'transform 0.3s ease';
+           // Cambia a la siguiente página después de un breve retraso
+           setTimeout(() => {
+               window.location.href = "invitacion.html";
+           }, 300);
+       }
+</script>
+</body>
+</html>
