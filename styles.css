@@ -116,3 +116,21 @@ img {
         padding: 8px 15px;
     }
 }
+/* AJUSTES ESPECÍFICOS PARA MÓVILES */
+@media (max-width: 768px) {
+    .contenedor-principal {
+        padding: 10px;
+        justify-content: flex-start; /* Empieza desde arriba */
+        padding-top: 5vh; /* Un pequeño espacio arriba */
+    }
+    
+    .foto {
+        max-width: 100% !important; /* Fuerza a que use todo el ancho */
+        width: 100% !important;
+    }
+    
+    .sello-contenedor {
+        max-width: 150px !important; /* Sello más pequeño en móviles */
+        margin: 10px auto;
+    }
+}
