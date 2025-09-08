@@ -35,7 +35,127 @@
         <!-- Imagen confirmar -->
         <img src="images/confirmar2.png" alt="Confirmar" class="confirmar">
 
-        <!-- SECCIÓN DE CONFIRMACIÓN - FORMULARIO -->
+        <!-- ✅ SCRIPT PRIMERO - Así las funciones se cargan antes que el formulario -->
+        <script>
+        // Variable para guardar el ID y datos del invitado encontrado
+        let invitadoData = null;
+
+        async function buscarInvitado() {
+            const telefono = document.getElementById('telefono').value.trim();
+            const mensajePersonalizado = document.getElementById('mensaje-personalizado');
+            const contenedor = document.getElementById('confirmacion-container');
+            const resultado = document.getElementById('mensaje-resultado');
+            const botonBuscar = document.querySelector('.formulario button');
+
+            resultado.textContent = '';
+
+            if (!telefono) {
+                resultado.textContent = "Por favor, ingresa tu número de teléfono.";
+                return;
+            }
+
+            try {
+                const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/Invitados?filterByFormula={Telefono}="'+telefono+'"', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer patMPTtIbHZPDRsVW.5c76cca894828c43b7269894259b4d33ffb41b260c8761637c7dc3ce8815e137',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.records.length > 0) {
+                    invitadoData = data.records[0];
+                    const nombre = invitadoData.fields.Nombre;
+                    const numInvitados = invitadoData.fields.Invitados;
+
+                    crearCorazones(botonBuscar);
+                    
+                    mensajePersonalizado.innerHTML = `Hola <strong>${nombre}</strong>. Hemos reservado <strong>${numInvitados} lugar(es)</strong> para ti. ¿Confirmas tu asistencia?`;
+                    contenedor.style.display = 'block';
+
+                } else {
+                    resultado.textContent = "❌ No encontramos una invitación con ese número. Por favor, verifica o contacta a los novios.";
+                }
+            } catch (error) {
+                resultado.textContent = "Error de conexión. Intenta más tarde.";
+                console.error("Error detallado:", error);
+            }
+        }
+
+        // Función para crear los corazones mágicos
+        function crearCorazones(boton) {
+            for (let i = 0; i < 5; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                heart.innerHTML = `
+        <svg viewBox="0 0 24 24" width="30" height="30">
+        <path fill="#941212" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+                `;
+                
+                const rect = boton.getBoundingClientRect();
+                const x = rect.left + (Math.random() * rect.width);
+                const y = rect.top + (Math.random() * rect.height);
+                
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 500);
+            }
+        }
+
+        // ✅ FUNCIÓN CORREGIDA - Esta SÍ funciona
+        async function enviarConfirmacion() {
+            const respuestaSeleccionada = document.querySelector('input[name="respuesta"]:checked');
+            const resultado = document.getElementById('mensaje-resultado');
+
+            if (!respuestaSeleccionada || !invitadoData) {
+                resultado.textContent = "Por favor, busca tu invitación y selecciona una opción.";
+                return;
+            }
+
+            const confirmacion = respuestaSeleccionada.value;
+
+            try {
+                // ✅ SOLO el campo Confirmacion (sin fecha por ahora)
+                const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/Invitados/' + invitadoData.id, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': 'Bearer patMPTtIbHZPDRsVW.5c76cca894828c43b7269894259b4d33ffb41b260c8761637c7dc3ce8815e137',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fields: {
+                            "Confirmacion": confirmacion
+                        }
+                    })
+                });
+
+                const responseText = await response.text();
+                console.log("Status:", response.status);
+                console.log("Response:", responseText);
+
+                if (response.ok) {
+                    resultado.innerHTML = `✅ <strong>¡Gracias por confirmar!</strong> Tu respuesta (<strong>${confirmacion}</strong>) ha sido registrada.`;
+                    document.getElementById('confirmacion-container').style.display = 'none';
+                } else {
+                    resultado.textContent = "❌ Error al guardar. Intenta más tarde.";
+                }
+            } catch (error) {
+                resultado.textContent = "❌ Error de conexión. Intenta más tarde.";
+                console.error("Error detallado:", error);
+            }
+        }
+        </script>
+
+        <!-- ✅ AHORA SÍ - Formulario después del script -->
         <div class="formulario">
             <h3>Confirma tu asistencia</h3>
             
@@ -59,125 +179,5 @@
 
         <script src="script.js"></script>
     </div>
-
-    <script>
-    // Variable para guardar el ID y datos del invitado encontrado
-    let invitadoData = null;
-
-    async function buscarInvitado() {
-        const telefono = document.getElementById('telefono').value.trim();
-        const mensajePersonalizado = document.getElementById('mensaje-personalizado');
-        const contenedor = document.getElementById('confirmacion-container');
-        const resultado = document.getElementById('mensaje-resultado');
-        const botonBuscar = document.querySelector('.formulario button');
-
-        resultado.textContent = '';
-
-        if (!telefono) {
-            resultado.textContent = "Por favor, ingresa tu número de teléfono.";
-            return;
-        }
-
-        try {
-            const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/Invitados?filterByFormula={Telefono}="'+telefono+'"', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer patMPTtIbHZPDRsVW.5c76cca894828c43b7269894259b4d33ffb41b260c8761637c7dc3ce8815e137',
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            const data = await response.json();
-
-            if (data.records.length > 0) {
-                invitadoData = data.records[0];
-                const nombre = invitadoData.fields.Nombre;
-                const numInvitados = invitadoData.fields.Invitados;
-
-                crearCorazones(botonBuscar);
-                
-                mensajePersonalizado.innerHTML = `Hola <strong>${nombre}</strong>. Hemos reservado <strong>${numInvitados} lugar(es)</strong> para ti. ¿Confirmas tu asistencia?`;
-                contenedor.style.display = 'block';
-
-            } else {
-                resultado.textContent = "❌ No encontramos una invitación con ese número. Por favor, verifica o contacta a los novios.";
-            }
-        } catch (error) {
-            resultado.textContent = "Error de conexión. Intenta más tarde.";
-            console.error("Error detallado:", error);
-        }
-    }
-
-    // Función para crear los corazones mágicos
-    function crearCorazones(boton) {
-        for (let i = 0; i < 5; i++) {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            
-            heart.innerHTML = `
-    <svg viewBox="0 0 24 24" width="30" height="30">
-    <path fill="#941212" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-    </svg>
-            `;
-            
-            const rect = boton.getBoundingClientRect();
-            const x = rect.left + (Math.random() * rect.width);
-            const y = rect.top + (Math.random() * rect.height);
-            
-            heart.style.left = `${x}px`;
-            heart.style.top = `${y}px`;
-            
-            document.body.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 500);
-        }
-    }
-
-    // ✅ FUNCIÓN CORREGIDA Y PROBADA - Esta SÍ funciona
-    async function enviarConfirmacion() {
-        const respuestaSeleccionada = document.querySelector('input[name="respuesta"]:checked');
-        const resultado = document.getElementById('mensaje-resultado');
-
-        if (!respuestaSeleccionada || !invitadoData) {
-            resultado.textContent = "Por favor, busca tu invitación y selecciona una opción.";
-            return;
-        }
-
-        const confirmacion = respuestaSeleccionada.value;
-
-        try {
-            // ✅ SOLO el campo Confirmacion (sin fecha por ahora)
-            const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/Invitados/' + invitadoData.id, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': 'Bearer patMPTtIbHZPDRsVW.5c76cca894828c43b7269894259b4d33ffb41b260c8761637c7dc3ce8815e137',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    fields: {
-                        "Confirmacion": confirmacion
-                        // "FechaConfirmacion": new Date().toISOString() // ← Comentado temporalmente
-                    }
-                })
-            });
-
-            const responseText = await response.text();
-            console.log("Status:", response.status);
-            console.log("Response:", responseText);
-
-            if (response.ok) {
-                resultado.innerHTML = `✅ <strong>¡Gracias por confirmar!</strong> Tu respuesta (<strong>${confirmacion}</strong>) ha sido registrada.`;
-                document.getElementById('confirmacion-container').style.display = 'none';
-            } else {
-                resultado.textContent = "❌ Error al guardar. Intenta más tarde.";
-            }
-        } catch (error) {
-            resultado.textContent = "❌ Error de conexión. Intenta más tarde.";
-            console.error("Error detallado:", error);
-        }
-    }
-    </script>
 </body>
 </html>
