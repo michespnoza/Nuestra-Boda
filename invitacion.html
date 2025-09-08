@@ -51,68 +51,7 @@
     </div>
 	
 	
-<!DOCTYPE html>
-<html>
-<head>
-<title>Invitación de Boda</title>
-<style>
-   body { font-family: 'Arial', sans-serif; text-align: center; background: #fff9f9; }
-   .invitacion { margin: 20px auto; padding: 20px; max-width: 600px; border: 1px solid #e0c8c8; }
-   .formulario { background: #f5e9e9; padding: 15px; border-radius: 10px; }
-   button { background: #d4a8a8; color: white; border: none; padding: 10px 20px; cursor: pointer; }
-</style>
-</head>
-<body>
-<div class="invitacion">
-<!-- Tu diseño de invitación aquí -->
-<p>Hemos reservado <span id="numero-invitados">X</span> lugares para ti</p>
-<div class="formulario">
-<p>¿Confirmas tu asistencia?</p>
-<input type="radio" name="confirmacion" id="si" value="Sí"> <label for="si">Sí</label>
-<input type="radio" name="confirmacion" id="no" value="No"> <label for="no">No</label>
-<button onclick="confirmarAsistencia()">Enviar</button>
-<p id="mensaje"></p>
-</div>
-</div>
-<script>
- // Datos del invitado (simulados o dinámicos)
- const invitado = {
-   nombre: "María González",      // Reemplaza con datos reales o búscalos desde tu Sheet
-   telefono: "+521234567890",     // Ejemplo: usa el teléfono ingresado por el usuario
-   invitados: 5                   // Ejemplo: obtén este dato de tu Sheet
- };
- // Función ACTUALIZADA (Paso 4) - Pegar esto reemplazando la anterior
- async function confirmarAsistencia() {
-   const confirmacion = document.querySelector('input[name="confirmacion"]:checked').value;
-   const fecha = new Date().toLocaleDateString();
-   try {
-     const response = await fetch(https://script.google.com/macros/s/AKfycbwxGUhgl-GdZswIfojG_XH7XKaqO0ZjkcHdLrCMCn3KSw1EUErK5d9QUZ25ctkifs8FGA/exec, {  // <-- Reemplaza con tu URL
-       method: "POST",
-       body: JSON.stringify({
-         nombre: invitado.nombre,
-         telefono: invitado.telefono,
-         confirmacion: confirmacion,
-         fecha: fecha
-       }),
-       headers: { "Content-Type": "application/json" }
-     });
-     const result = await response.json();
-     if (result.success) {
-       document.getElementById("mensaje").innerHTML = `
-         ¡Gracias, ${invitado.nombre}!<br>
-         Confirmación registrada: <strong>${confirmacion}</strong>.
-       `;
-     } else {
-       document.getElementById("mensaje").textContent = "Error: Invitado no encontrado.";
-     }
-   } catch (error) {
-     document.getElementById("mensaje").textContent = "Error al enviar. Intenta más tarde.";
-   }
- }
-
-	
-	
-</body>
+<!-- SECCIÓN DE CONFIRMACÓN - NUEVO FORMULARIO -->
 <div class="formulario">
     <h3>Confirma tu asistencia</h3>
     
@@ -167,7 +106,7 @@ async function buscarInvitado() {
             const nombre = invitadoData.fields.Nombre;
             const numInvitados = invitadoData.fields.Invitados;
 
-            // muestra el mensaje personalizado
+            // Muestra el mensaje personalizado
             mensajePersonalizado.innerHTML = `Hola <strong>${nombre}</strong>. Hemos reservado <strong>${numInvitados} lugar(es)</strong> para ti. ¿Confirmas tu asistencia?`;
             contenedor.style.display = 'block'; // Muestra las opciones Sí/No
 
@@ -219,4 +158,5 @@ async function enviarConfirmacion() {
     }
 }
 </script>
+</body>
 </html>
