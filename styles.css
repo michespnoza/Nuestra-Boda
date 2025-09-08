@@ -116,3 +116,20 @@ img {
         padding: 8px 15px;
     }
 }
+/* Estilos para los corazones mágicos */
+.heart {
+    position: absolute;
+    pointer-events: none;
+    animation: float-heart 0.5s ease-in forwards;
+}
+
+@keyframes float-heart {
+    0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, -50px) scale(1.2);
+        opacity: 0;
+    }
+}
