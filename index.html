@@ -7,6 +7,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+ <!-- BLOQUEO PARA COMPUTADORAS - AGREGAR ESTO -->
+    <script>
+        // Función para detectar si es un dispositivo móvil
+        function esMovil() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
+        // Si NO es un móvil, muestra un mensaje y bloquea el acceso
+        if (!esMovil()) {
+            // Reemplaza todo el cuerpo del documento con un mensaje
+            document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Invitación de Boda</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            background-color: #f8f0e5;
+                            text-align: center;
+                            padding: 20px;
+                        }
+                        .mensaje {
+                            max-width: 500px;
+                            padding: 30px;
+                            background: white;
+                            border-radius: 15px;
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                        }
+                        h1 {
+                            color: #941212;
+                            margin-bottom: 20px;
+                        }
+                        p {
+                            color: #555;
+                            line-height: 1.6;
+                            margin-bottom: 15px;
+                        }
+                        .icono {
+                            font-size: 50px;
+                            margin-bottom: 20px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="mensaje">
+                        <div class="icono">📱</div>
+                        <h1>Invitación Mobile Only</h1>
+                        <p>¡Hola! Nuestra invitación está diseñada para verse mejor en dispositivos móviles.</p>
+                        <p><strong>Por favor, ábrela desde tu teléfono celular.</strong></p>
+                        <p>🔍 <em>Escanea el código QR con tu cámara o abre tu WhatsApp para compartir el enlace fácilmente.</em></p>
+                    </div>
+                </body>
+                </html>
+            `);
+            // Detiene la ejecución de cualquier otro script
+            throw new Error("Acceso permitido solo en móviles");
+        }
+    </script>
+    <!-- FIN DEL BLOQUEO -->
 </head>
 <body>
 <div class="contenedor">
