@@ -93,7 +93,7 @@ async function buscarInvitado() {
 
     try {
         // URL de API de Airtable - ¡DEBES REEMPLAZAR ESTOS DATOS!
-        const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/Invitados?filterByFormula={Telefono}="'+telefono+'"', {
+        const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/AsistenciaBoda?filterByFormula={Telefono}="'+telefono+'"', {
                 'Authorization': 'Bearer patDWerAQWTaZcQeo.10fbcc38d75596e5d24a5c30fe64886fa4ab350e27f0178fee7eb9f9bbd78f54'
             }
         });
@@ -132,7 +132,7 @@ async function enviarConfirmacion() {
 
     try {
         // Actualiza el registro en Airtable - ¡REEMPLAZA LA URL!
-        const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/Invitados/' + invitadoData.id, {
+        const response = await fetch('https://api.airtable.com/v0/appU5p0cqIiGjJ7Q0/AsistenciaBoda/' + invitadoData.id, {
             method: 'PATCH',
             headers: {
                 'Authorization': 'patDWerAQWTaZcQeo.10fbcc38d75596e5d24a5c30fe64886fa4ab350e27f0178fee7eb9f9bbd78f54',
