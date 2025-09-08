@@ -46,33 +46,6 @@
        
         <script src="script.js"></script>
 
-</body>
-		
-    </div>
-	
-	
-<!-- SECCIÓN DE CONFIRMACÓN - NUEVO FORMULARIO -->
-<div class="formulario">
-    <h3>Confirma tu asistencia</h3>
-    
-    <!-- Paso 1: Pide SOLO el teléfono -->
-    <p>Por favor, ingresa tu número de teléfono para confirmar:</p>
-    <input type="tel" id="telefono" placeholder="Ej. 5512345678" required>
-    <button onclick="buscarInvitado()">Buscar Invitación</button>
-    
-    <!-- Paso 2: Mensaje personalizado y opciones SÍ/NO -->
-    <div id="confirmacion-container" style="display: none;">
-        <p id="mensaje-personalizado"></p>
-        <div>
-            <input type="radio" name="respuesta" id="si" value="Sí" required> <label for="si">Sí, asistiré</label><br>
-            <input type="radio" name="respuesta" id="no" value="No"> <label for="no">No, no podré asistir</label>
-        </div>
-        <button onclick="enviarConfirmacion()">Enviar Confirmación</button>
-    </div>
-
-    <p id="mensaje-resultado"></p>
-</div>
-
 <script>
 // Variable para guardar el ID y datos del invitado encontrado
 let invitadoData = null;
@@ -157,5 +130,33 @@ async function enviarConfirmacion() {
     }
 }
 </script>
+</body>
+		
+    </div>
+	
+	
+<!-- SECCIÓN DE CONFIRMACÓN - NUEVO FORMULARIO -->
+<div class="formulario">
+    <h3>Confirma tu asistencia</h3>
+    
+    <!-- Paso 1: Pide SOLO el teléfono -->
+    <p>Por favor, ingresa tu número de teléfono para confirmar:</p>
+    <input type="tel" id="telefono" placeholder="Ej. 5512345678" required>
+    <button onclick="buscarInvitado()">Buscar Invitación</button>
+    
+    <!-- Paso 2: Mensaje personalizado y opciones SÍ/NO -->
+    <div id="confirmacion-container" style="display: none;">
+        <p id="mensaje-personalizado"></p>
+        <div>
+            <input type="radio" name="respuesta" id="si" value="Sí" required> <label for="si">Sí, asistiré</label><br>
+            <input type="radio" name="respuesta" id="no" value="No"> <label for="no">No, no podré asistir</label>
+        </div>
+        <button onclick="enviarConfirmacion()">Enviar Confirmación</button>
+    </div>
+
+    <p id="mensaje-resultado"></p>
+</div>
+
+
 </body>
 </html>
