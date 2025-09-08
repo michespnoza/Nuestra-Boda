@@ -140,7 +140,7 @@ function crearCorazones(boton) {
         }, 500);
     }
 }
-}
+
 
     // Función que envía la confirmación a Airtable
     async function enviarConfirmacion() {
@@ -165,7 +165,7 @@ function crearCorazones(boton) {
                 body: JSON.stringify({
                     fields: {
                         "Confirmacion": confirmacion,
-                        //"FechaConfirmacion": new Date().toISOString()
+                        "FechaConfirmacion": new Date().toISOString()
                     }
                 })
             });
