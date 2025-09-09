@@ -6,75 +6,17 @@
     <title>Invitación de Michelle y René</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-	<!-- BLOQUEO PARA COMPUTADORAS - AGREGAR ESTO -->
-    <script>
-        // Función para detectar si es un dispositivo móvil
-        function esMovil() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-        
-        // Si NO es un móvil, muestra un mensaje y bloquea el acceso
-        if (!esMovil()) {
-            // Reemplaza todo el cuerpo del documento con un mensaje
-            document.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Invitación de Boda</title>
-                    <style>
-                        body {
-                            font-family: Arial, sans-serif;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            height: 100vh;
-                            background-color: #f8f0e5;
-                            text-align: center;
-                            padding: 20px;
-                        }
-                        .mensaje {
-                            max-width: 500px;
-                            padding: 30px;
-                            background: white;
-                            border-radius: 15px;
-                            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                        }
-                        h1 {
-                            color: #941212;
-                            margin-bottom: 20px;
-                        }
-                        p {
-                            color: #555;
-                            line-height: 1.6;
-                            margin-bottom: 15px;
-                        }
-                        .icono {
-                            font-size: 50px;
-                            margin-bottom: 20px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="mensaje">
-                        <div class="icono">📱</div>
-                        <h1>Invitación Mobile Only</h1>
-                        <p>¡Hola! Nuestra invitación está diseñada para verse mejor en dispositivos móviles.</p>
-                        <p><strong>Por favor, ábrela desde tu teléfono celular.</strong></p>
-                        <p>♡ <em>Te agradecemos mucho.</em></p>
-                    </div>
-                </body>
-                </html>
-            `);
-            // Detiene la ejecución de cualquier otro script
-            throw new Error("Acceso permitido solo en móviles");
-        }
-    </script>
+	
 </head>
 <body>
     <div class="contenedor">
         <!-- Leyenda con efecto de máquina de escribir -->
         <h2 class="leyenda" id="maquina-escribir"></h2>
 
+
+        <!-- Imagen en presentacion -->
+        <img src="images/niños.png" alt="MR" class="niños">
+		
         <!-- Imagen en presentacion -->
         <img src="images/inicio.png?v=2" alt="Michelle y René" class="presentacion">
         
@@ -206,7 +148,7 @@
                 console.log("Response:", responseText);
 
                 if (response.ok) {
-                    resultado.innerHTML = `✅ <strong>¡Estas dentro 💕!</strong> Tu respuesta (<strong>${confirmacion}</strong>) ha sido registrada.`;
+                    resultado.innerHTML = `<strong>¡Estas dentro 💕!</strong> Tu respuesta (<strong>${confirmacion}</strong>) ha sido registrada.`;
                     document.getElementById('confirmacion-container').style.display = 'none';
                 } else {
                     resultado.textContent = "❌ Error al guardar. Intenta más tarde.";
