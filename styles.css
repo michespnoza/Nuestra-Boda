@@ -1,255 +1,179 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación con Corazones</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos generales */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF;
-            overflow-x: hidden; /* Previene el scroll horizontal */
-        }
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    overflow-x: hidden; /* Previene el scroll horizontal */
+}
 
-        /* Contenedor principal */
-        .contenedor {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 100%;
-            max-width: 1600px;
-            padding: 15px;
-            margin: 0 auto;
-            box-sizing: border-box;
-        }
+/* Contenedor principal */
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+	    max-width: 1600px;
+    padding: 15px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 
-        /* Títulos y textos */
-        .titulo, .leyenda {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(24px, 6vw, 40px); /* Tamaño responsive */
-            color: #0f0300;
-            margin: 10px 0;
-            padding: 0 10px;
-        }
+/* Títulos y textos */
+.titulo, .leyenda {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(24px, 6vw, 40px); /* Tamaño responsive */
+    color: #0f0300;
+    margin: 10px 0;
+    padding: 0 10px;
+}
 
-        .nombres {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(30px, 8vw, 70px); /* Tamaño responsive */
-            color: #333;
-            margin: 20px 0;
-            padding: 0 10px;
-        }
+.nombres {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(30px, 8vw, 70px); /* Tamaño responsive */
+    color: #333;
+    margin: 20px 0;
+    padding: 0 10px;
+}
 
-        .texto-cuenta {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(18px, 5vw, 24px); /* Tamaño responsive */
-            color: #941212;
-            margin-bottom: 10px;
-        }
+.texto-cuenta {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(18px, 5vw, 24px); /* Tamaño responsive */
+    color: #941212;
+    margin-bottom: 10px;
+}
 
-        /* Imágenes */
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
+/* Imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 
-        .fotocorta, .inicio, .molino, .foto2, .dresscode, .confirmar {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            margin: 15px auto;
-            border-radius: 10px;
-        }
+.fotocorta, .inicio, .molino, .foto2, .dresscode, .confirmar {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 15px auto;
+    border-radius: 10px;
+}
 
-        /* Cuenta regresiva */
-        #cuenta {
-            font-family: Arial, sans-serif;
-            font-size: clamp(12px, 3vw, 15px);
-            color: #555;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap; /* Para móviles pequeños */
-            gap: 5px;
-            padding: 0 10px;
-        }
 
-        #cuenta span {
-            background-color: #e9d6c7;
-            padding: 10px 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            min-width: 40px;
-            text-align: center;
-        }
 
-        /* Sello */
-        .sello-contenedor {
-            width: 100%;
-            max-width: 550px;
-            margin: 0 auto;
-        }
 
-        .sello {
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
 
-        /* Media Queries para ajustes específicos */
-        @media (max-width: 600px) {
-            .contenedor {
-                padding: 10px;
-            }
-            
-            #cuenta {
-                gap: 3px;
-            }
-            
-            #cuenta span {
-                padding: 8px 10px;
-                font-size: 14px;
-            }
-            
-            .boton, #magicButton {
-                padding: 8px 15px;
-            }
-        }
-        
-        /* Estilos para los corazones mágicos */
-        .heart {
-            position: absolute;
-            pointer-events: none;
-            animation: float-heart 1s ease-in forwards;
-            font-size: 20px;
-            color: #ff4d6d;
-            z-index: 1000;
-        }
+/* Cuenta regresiva */
+#cuenta {
+    font-family: Arial, sans-serif;
+    font-size: clamp(12px, 3vw, 15px);
+    color: #555;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Para móviles pequeños */
+    gap: 5px;
+    padding: 0 10px;
+}
 
-        @keyframes float-heart {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(0, -100px) scale(1.5);
-                opacity: 0;
-            }
-        }
-        
-        /* Botón "Buscar Invitación" */
-        .formulario button {
-            background: #5d0202; /* Rosa claro */
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 10px 0;
-            box-shadow: 0 4px 8px rgba(255, 158, 203, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+#cuenta span {
+    background-color: #e9d6c7;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    min-width: 40px;
+    text-align: center;
+}
 
-        /* Botón "Enviar Confirmación" */
-        #confirmacion-container button {
-            background: #5d0202; /* Guinda */
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 15px;
-            box-shadow: 0 4px 8px rgba(255, 107, 157, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+/* Sello */
+.sello-contenedor {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+}
 
-        /* Efecto hover para ambos botones */
-        .formulario button:hover,
-        #confirmacion-container button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 107, 157, 0.4);
-        }
+.sello {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
 
-        /* Efecto al hacer clic */
-        .formulario button:active,
-        #confirmacion-container button:active {
-            transform: translateY(0);
-        }
-    </style>
-</head>
-<body>
-    <div class="contenedor">
-        <h1 class="titulo">Invitación Especial</h1>
-        
-        <!-- Botón de ejemplo -->
-        <div class="formulario">
-            <button id="btnBuscar">Buscar Invitación</button>
-        </div>
-        
-        <!-- Otro botón de ejemplo -->
-        <div id="confirmacion-container">
-            <button id="btnConfirmar">Enviar Confirmación</button>
-        </div>
-    </div>
+/* Media Queries para ajustes específicos */
+@media (max-width: 600px) {
+    .contenedor {
+        padding: 10px;
+    }
+    
+    #cuenta {
+        gap: 3px;
+    }
+    
+    #cuenta span {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    
+    .boton, #magicButton {
+        padding: 8px 15px;
+    }
+}
+/* Estilos para los corazones mágicos */
+.heart {
+    position: absolute;
+    pointer-events: none;
+    animation: float-heart 0.5s ease-in forwards;
+}
 
-    <script>
-        // Función para crear corazones
-        function createHeart(event) {
-            const button = event.currentTarget;
-            const rect = button.getBoundingClientRect();
-            
-            // Crear elemento corazón
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            
-            // Posicionar el corazón en el centro del botón
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-            
-            heart.style.left = `${x}px`;
-            heart.style.top = `${y}px`;
-            
-            // Añadir el corazón al cuerpo del documento
-            document.body.appendChild(heart);
-            
-            // Eliminar el corazón después de que termine la animación
-            setTimeout(() => {
-                heart.remove();
-            }, 1000);
-        }
-        
-        // Añadir event listeners a los botones cuando el DOM esté cargado
-        document.addEventListener('DOMContentLoaded', function() {
-            const btnBuscar = document.getElementById('btnBuscar');
-            const btnConfirmar = document.getElementById('btnConfirmar');
-            
-            if (btnBuscar) {
-                btnBuscar.addEventListener('click', createHeart);
-            }
-            
-            if (btnConfirmar) {
-                btnConfirmar.addEventListener('click', createHeart);
-            }
-            
-            // También puedes añadir el efecto a todos los botones con una clase específica
-            // document.querySelectorAll('.boton-confirmacion').forEach(button => {
-            //     button.addEventListener('click', createHeart);
-            // });
-        });
-    </script>
-</body>
-</html>
+@keyframes float-heart {
+    0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, -50px) scale(1.2);
+        opacity: 0;
+    }
+}
+/* Botón "Buscar Invitación" */
+.formulario button {
+    background: #5d0202;; /* Rosa claro */
+	font-family: 'Dancing Script', cursive;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(255, 158, 203, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Botón "Enviar Confirmación" */
+#confirmacion-container button {
+    background: #5d0202; /* Guinda */
+	font-family: 'Dancing Script';
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(255, 107, 157, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para ambos botones */
+.formulario button:hover,
+#confirmacion-container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 107, 157, 0.4);
+}
+
+/* Efecto al hacer clic */
+.formulario button:active,
+#confirmacion-container button:active {
+    transform: translateY(0);
+}
