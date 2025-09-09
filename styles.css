@@ -136,7 +136,7 @@ img {
 /* Botón "Buscar Invitación" */
 .formulario button {
     background: #5d0202;; /* Rosa claro */
-	font-family: 'Garamond', cursive;
+	font-family: 'Garamond';
     color: white;
     border: none;
     padding: 12px 25px;
