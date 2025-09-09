@@ -133,3 +133,45 @@ img {
         opacity: 0;
     }
 }
+/* Botón "Buscar Invitación" */
+.formulario button {
+    background: #ff9ecb; /* Rosa claro */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(255, 158, 203, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Botón "Enviar Confirmación" */
+#confirmacion-container button {
+    background: #ff6b9d; /* Rosa más intenso */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(255, 107, 157, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para ambos botones */
+.formulario button:hover,
+#confirmacion-container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 107, 157, 0.4);
+}
+
+/* Efecto al hacer clic */
+.formulario button:active,
+#confirmacion-container button:active {
+    transform: translateY(0);
+}
