@@ -135,7 +135,7 @@ img {
 }
 /* Botón "Buscar Invitación" */
 .formulario button {
-    background: #5d0202;; /* Rosa claro */
+    background: #5d0202; /* Rosa claro */
 	font-family: 'Garamond';
     color: white;
     border: none;
@@ -152,7 +152,7 @@ img {
 /* Botón "Enviar Confirmación" */
 #confirmacion-container button {
     background: #5d0202; /* Guinda */
-	font-family: 'Dancing Script';
+	font-family: 'Garamond';
     color: white;
     border: none;
     padding: 12px 25px;
